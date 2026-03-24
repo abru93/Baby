@@ -9,11 +9,7 @@
     body {
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-
-        background: 
-            linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-            url("Boy OR Girl.jpg") no-repeat center center / cover;
-
+        background: linear-gradient(135deg, #ffd6e0, #cde7ff);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -21,72 +17,98 @@
     }
 
     .app {
-        width: 92%;
-        max-width: 420px;
+        width: 95%;
+        max-width: 800px;
+        height: 85vh;
+
         background: rgba(255,255,255,0.2);
         backdrop-filter: blur(18px);
-        border-radius: 28px;
-        padding: 28px 22px;
+        border-radius: 30px;
+        padding: 20px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+    }
+
+    /* LEFT SIDE */
+    .left {
+        width: 45%;
         text-align: center;
-        box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+    }
+
+    .baby-img {
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     }
 
     .weeks {
-        margin-bottom: 22px;
+        margin-top: 15px;
         font-size: 18px;
         font-weight: 500;
-        color: #fff;
-        letter-spacing: 0.5px;
+        color: #333;
+    }
+
+    /* RIGHT SIDE */
+    .right {
+        width: 50%;
+        text-align: center;
     }
 
     .timer {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 14px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
 
     .box {
         background: rgba(255,255,255,0.9);
-        padding: 18px 8px;
+        padding: 20px 10px;
         border-radius: 18px;
         box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-        transition: transform 0.2s ease;
-    }
-
-    .box:hover {
-        transform: translateY(-3px);
     }
 
     .number {
-        font-size: 28px;
+        font-size: 32px;
         font-weight: 700;
         color: #222;
-        margin-bottom: 4px;
     }
 
     .label {
-        font-size: 11px;
+        font-size: 12px;
         color: #777;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
 
     .footer {
-        margin-top: 24px;
+        margin-top: 15px;
         font-size: 15px;
-        color: #fff;
-        opacity: 0.9;
+        color: #444;
     }
 
-    /* Mobile optimization */
-    @media (max-width: 350px) {
-        .number {
-            font-size: 22px;
+    /* Responsive: fallback to vertical if screen is small */
+    @media (max-width: 600px) {
+        .app {
+            flex-direction: column;
+            height: auto;
         }
-        .label {
-            font-size: 10px;
+
+        .left, .right {
+            width: 100%;
+        }
+
+        .timer {
+            grid-template-columns: repeat(4, 1fr);
         }
     }
+
 </style>
 </head>
 
@@ -94,28 +116,36 @@
 
 <div class="app">
 
-    <div class="weeks" id="weeks"></div>
-
-    <div class="timer">
-        <div class="box">
-            <div id="days" class="number">0</div>
-            <div class="label">Days</div>
-        </div>
-        <div class="box">
-            <div id="hours" class="number">0</div>
-            <div class="label">Hours</div>
-        </div>
-        <div class="box">
-            <div id="minutes" class="number">0</div>
-            <div class="label">Minutes</div>
-        </div>
-        <div class="box">
-            <div id="seconds" class="number">0</div>
-            <div class="label">Seconds</div>
-        </div>
+    <!-- LEFT -->
+    <div class="left">
+        <img src="Boy OR Girl.jpg" class="baby-img" alt="Baby">
+        <div class="weeks" id="weeks"></div>
     </div>
 
-    <div class="footer" id="status"></div>
+    <!-- RIGHT -->
+    <div class="right">
+        <div class="timer">
+            <div class="box">
+                <div id="days" class="number">0</div>
+                <div class="label">Days</div>
+            </div>
+            <div class="box">
+                <div id="hours" class="number">0</div>
+                <div class="label">Hours</div>
+            </div>
+            <div class="box">
+                <div id="minutes" class="number">0</div>
+                <div class="label">Minutes</div>
+            </div>
+            <div class="box">
+                <div id="seconds" class="number">0</div>
+                <div class="label">Seconds</div>
+            </div>
+        </div>
+
+        <div class="footer" id="status"></div>
+    </div>
+
 </div>
 
 <script>
