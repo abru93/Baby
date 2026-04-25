@@ -37,11 +37,14 @@ body {
     font-size: 32px;
     font-weight: bold;
     letter-spacing: 2px;
+    margin-bottom: 10px;
 }
 
-.title span:nth-child(1) { color: #ff6b6b; }
-.title span:nth-child(2) { color: #4ecdc4; }
-.title span:nth-child(3) { color: #ffcc5c; }
+/* Updated color spans for the new title */
+.title span.color1 { color: #ff6b6b; } /* "WAITING" */
+.title span.color2 { color: #4ecdc4; } /* "FOR" */
+.title span.color3 { color: #ffcc5c; } /* "OUR" */
+.title span.color4 { color: #6c5ce7; } /* "BABY!!!" */
 
 /* Subtitle */
 .subtitle {
@@ -88,14 +91,16 @@ body {
 <div class="app">
 
     <div class="title">
-        <span>MY</span> <span>BABY</span> <span>COUNTDOWN</span>
+        <span class="color1">WAITING</span> 
+        <span class="color2">FOR</span> 
+        <span class="color3">OUR</span>
+        <span class="color4">BABY!!!</span>
     </div>
 
     <div class="subtitle">Boy or Girl?</div>
 
     <div class="weeks" id="weeks"></div>
 
-    <!-- TIMER -->
     <div class="timer">
         <div class="time">
             <span id="days" class="days">0</span> days
