@@ -8,65 +8,123 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Quicksand:wght@300;700&family=Montserrat:wght@800&family=Dancing+Script:wght@700&display=swap');
 
         body {
-            background-image: url('Boy OR Girl.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-color: #fdf6f0; /* Fallback color */
+            background-color: #fdf6f0;
             font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
             overflow-x: hidden;
         }
 
+        /* The flex wrapper handles the horizontal layout */
+        .main-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            gap: 30px;
+        }
+
+        /* Styling for the boy/girl images */
+        .side-character {
+            flex: 0 0 180px; /* Fixed width for images */
+            max-width: 220px;
+            animation: softFloat 5s ease-in-out infinite;
+        }
+
+        .side-character img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        }
+
+        .side-character.right {
+            animation-delay: 0.5s;
+        }
+
+        /* The central countdown box */
         .container {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 60px 40px;
+            padding: 50px 35px;
             border-radius: 50px;
             text-align: center;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.15);
+            flex: 1;
+            max-width: 500px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.1);
             border: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 10;
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 400;
+            font-size: 2rem;
             font-style: italic;
-            letter-spacing: 1px;
             color: #63352e;
             margin-top: 0;
-            margin-bottom: 40px;
-            animation: fadeInDown 1.5s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            margin-bottom: 30px;
         }
 
         .pregnancy-status {
             display: inline-block;
-            padding: 12px 35px;
-            margin-bottom: 40px;
-            font-size: 1.6rem;
+            padding: 12px 30px;
+            margin-bottom: 35px;
+            font-size: 1.4rem;
             font-weight: 700;
             color: white;
             background: linear-gradient(-45deg, #a2d2ff, #ffafcc, #bde0fe, #ffc8dd);
             background-size: 400% 400%;
             border-radius: 100px;
-            animation: gradientShift 8s ease infinite, bounce 3s ease-in-out infinite;
-            box-shadow: 0 8px 15px rgba(162, 210, 255, 0.3);
+            animation: gradientShift 8s ease infinite;
             border: 3px solid white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .timer-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.5);
+            flex: 1;
+            padding: 20px 5px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .time-box span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #4a2c2a;
+            display: block;
+        }
+
+        .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #8d5b4c;
+            margin-top: 5px;
+        }
+
+        .footer-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #d17a5d;
+            margin-top: 30px;
+        }
+
+        /* Animations */
+        @keyframes softFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         @keyframes gradientShift {
@@ -75,125 +133,78 @@
             100% { background-position: 0% 50%; }
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .timer-grid {
-            display: flex;
-            justify-content: space-around;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .time-box {
-            background: rgba(255, 255, 255, 0.45);
-            flex: 1;
-            padding: 25px 10px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .time-box:nth-child(2) { animation-delay: 0.5s; }
-        .time-box:nth-child(3) { animation-delay: 1s; }
-        .time-box:nth-child(4) { animation-delay: 1.5s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .time-box span {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #4a2c2a;
-            letter-spacing: -2px;
-            line-height: 1;
-            display: block;
-        }
-
-        .label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #8d5b4c;
-            margin-top: 8px;
-        }
-
-        .footer-text {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
-            color: #d17a5d;
-            margin-top: 35px;
-            opacity: 0.9;
-        }
-
-        @media (max-width: 500px) {
-            h1 { font-size: 1.7rem; }
-            .time-box span { font-size: 1.6rem; }
-            .pregnancy-status { font-size: 1.2rem; padding: 10px 25px; }
-            .footer-text { font-size: 1.5rem; }
+        /* Mobile adjustments: Stack images below the counter */
+        @media (max-width: 850px) {
+            .main-wrapper { flex-direction: column; }
+            .side-character { flex: 0 0 auto; width: 140px; }
+            .side-character.left { order: 2; }
+            .side-character.right { order: 3; }
+            .container { order: 1; width: 90%; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Waiting for our baby...</h1>
-
-    <div class="pregnancy-status" id="statusLine">
-        Calculating...
+<div class="main-wrapper">
+    <!-- Left Character -->
+    <div class="side-character left">
+        <img src="Baby Boy.png" alt="Baby Boy">
     </div>
 
-    <div class="timer-grid">
-        <div class="time-box">
-            <span id="days">000</span>
-            <div class="label">Days</div>
+    <!-- Central Counter -->
+    <div class="container">
+        <h1>Waiting for our baby...</h1>
+
+        <div class="pregnancy-status" id="statusLine">
+            Calculating...
         </div>
-        <div class="time-box">
-            <span id="hours">00</span>
-            <div class="label">Hours</div>
+
+        <div class="timer-grid">
+            <div class="time-box">
+                <span id="days">000</span>
+                <div class="label">Days</div>
+            </div>
+            <div class="time-box">
+                <span id="hours">00</span>
+                <div class="label">Hours</div>
+            </div>
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <div class="label">Mins</div>
+            </div>
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <div class="label">Secs</div>
+            </div>
         </div>
-        <div class="time-box">
-            <span id="minutes">00</span>
-            <div class="label">Mins</div>
-        </div>
-        <div class="time-box">
-            <span id="seconds">00</span>
-            <div class="label">Secs</div>
-        </div>
+
+        <p class="footer-text" id="footerText">.....until our due date!</p>
     </div>
 
-    <p class="footer-text" id="footerText">.....until our due date!</p>
+    <!-- Right Character -->
+    <div class="side-character right">
+        <img src="Baby Girl.png" alt="Baby Girl">
+    </div>
 </div>
 
 <script>
-    // Pregnancy calculation dates
+    // Config: Start Date & Due Date (excluding end date)
     const startDate = new Date("2025-11-09T00:00:00").getTime();
-    
-    // Set to 00:00:00 to exclude the due day from the countdown
     const dueDate = new Date("2026-08-16T00:00:00").getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
         
-        // 1. Update Progress (Weeks & Days since start)
+        // 1. Progress Logic (Weeks & Days)
         const diffFromStart = now - startDate;
         if (diffFromStart > 0) {
             const totalDaysPregnant = Math.floor(diffFromStart / (1000 * 60 * 60 * 24));
             const weeks = Math.floor(totalDaysPregnant / 7);
             const daysRemainder = totalDaysPregnant % 7;
             document.getElementById("statusLine").innerHTML = `We're ${weeks} weeks & ${daysRemainder} days!`;
-        } else {
-            document.getElementById("statusLine").innerHTML = `Journey begins soon!`;
         }
 
-        // 2. Update Countdown (Time remaining until due date)
+        // 2. Countdown Logic
         const timeLeft = dueDate - now;
 
         if (timeLeft > 0) {
@@ -207,14 +218,13 @@
             document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
             document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
         } else {
-            // End state when baby arrives
+            // Reached due date
             document.getElementById("statusLine").style.display = "none";
-            document.querySelector(".timer-grid").innerHTML = "<h2 style='color:#63352e; font-family: Playfair Display; font-size: 2rem; font-style: italic;'>Welcome Little One!</h2>";
+            document.querySelector(".timer-grid").innerHTML = "<h2 style='color:#63352e; font-style: italic;'>Welcome Little One!</h2>";
             document.getElementById("footerText").innerText = "The adventure begins!";
         }
     }
 
-    // Refresh every second
     setInterval(updateCountdown, 1000);
     updateCountdown();
 </script>
