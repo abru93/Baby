@@ -13,6 +13,7 @@
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
+            background-color: #fdf6f0; /* Fallback color */
             font-family: 'Quicksand', sans-serif;
             display: flex;
             justify-content: center;
@@ -35,7 +36,6 @@
             border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
-        /* Updated Header with ellipsis */
         h1 {
             font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
@@ -44,7 +44,7 @@
             letter-spacing: 1px;
             color: #63352e;
             margin-top: 0;
-            margin-bottom: 40px; /* Increased margin since icons are gone */
+            margin-bottom: 40px;
             animation: fadeInDown 1.5s ease-out;
         }
 
@@ -53,7 +53,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- STATUS & TIMER --- */
         .pregnancy-status {
             display: inline-block;
             padding: 12px 35px;
@@ -148,7 +147,7 @@
     <h1>Waiting for our baby...</h1>
 
     <div class="pregnancy-status" id="statusLine">
-        We are ... weeks & ... days!
+        Calculating...
     </div>
 
     <div class="timer-grid">
@@ -170,27 +169,31 @@
         </div>
     </div>
 
-    <p class="footer-text">.....until our due date!</p>
+    <p class="footer-text" id="footerText">.....until our due date!</p>
 </div>
 
 <script>
-    // Pregnancy calculation: Start 11/09/2025 | Due 16/08/2026
+    // Pregnancy calculation dates
     const startDate = new Date("2025-11-09T00:00:00").getTime();
-    const dueDate = new Date("2026-08-16T23:59:59").getTime();
+    
+    // Set to 00:00:00 to exclude the due day from the countdown
+    const dueDate = new Date("2026-08-16T00:00:00").getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
         
-        // 1. Update Weeks & Days Status
+        // 1. Update Progress (Weeks & Days since start)
         const diffFromStart = now - startDate;
         if (diffFromStart > 0) {
             const totalDaysPregnant = Math.floor(diffFromStart / (1000 * 60 * 60 * 24));
             const weeks = Math.floor(totalDaysPregnant / 7);
             const daysRemainder = totalDaysPregnant % 7;
             document.getElementById("statusLine").innerHTML = `We're ${weeks} weeks & ${daysRemainder} days!`;
+        } else {
+            document.getElementById("statusLine").innerHTML = `Journey begins soon!`;
         }
 
-        // 2. Update Due Date Countdown
+        // 2. Update Countdown (Time remaining until due date)
         const timeLeft = dueDate - now;
 
         if (timeLeft > 0) {
@@ -204,10 +207,14 @@
             document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
             document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
         } else {
-            document.querySelector(".timer-grid").innerHTML = "<h2 style='color:#5b8c85'>Welcome Little One!</h2>";
+            // End state when baby arrives
+            document.getElementById("statusLine").style.display = "none";
+            document.querySelector(".timer-grid").innerHTML = "<h2 style='color:#63352e; font-family: Playfair Display; font-size: 2rem; font-style: italic;'>Welcome Little One!</h2>";
+            document.getElementById("footerText").innerText = "The adventure begins!";
         }
     }
 
+    // Refresh every second
     setInterval(updateCountdown, 1000);
     updateCountdown();
 </script>
